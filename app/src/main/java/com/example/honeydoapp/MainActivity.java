@@ -6,10 +6,8 @@ import androidx.cardview.widget.CardView;
 import androidx.core.view.ScrollingView;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.view.View;
@@ -40,7 +38,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onClick(View view){
-//        Toast.makeText(mContext, Integer.toString(view.getId()),Toast.LENGTH_LONG).show();
+        Toast.makeText(mContext, Integer.toString(view.getId()),Toast.LENGTH_SHORT).show();
 
         switch (view.getId()) {
             case R.id.button:
@@ -78,24 +76,35 @@ public class MainActivity extends AppCompatActivity
             );
                 newCardView.setLayoutParams(params);
                 // Set cardView content padding
-                newCardView.setContentPadding(10, 0, 10, 4);
-                newCardView.setPadding(6,3,6,3);
+                newCardView.setContentPadding(20, 10, 10, 10);
+                newCardView.setPadding(6,15,6,15);
+                newCardView.setUseCompatPadding(true);
+                newCardView.setCardElevation(10);
+                newCardView.setRadius(5);
+                newCardView.setPreventCornerOverlap(true);
+                newCardView.setPaddingRelative(0,5,0,5);
                 // Set a background color for CardView
                 newCardView.setCardBackgroundColor(Color.parseColor("#005F5B5B"));
                 newCardView.setUseCompatPadding(false);
                 newCardView.setMinimumHeight(30);
                 newCardView.setClickable(true);
-                newCardView.setOnClickListener(this);
+                newCardView.setOnClickListener(MainActivity.this);
 
                 // Initialize a new TextView to put in CardView
                 TextView tv = new TextView(mContext);
+                tv.setPadding(5,10,5,10);
+                tv.setTextSize(20);
                 tv.setLayoutParams(params);
                 String noteText = "Name: "+Name+"\n"+"Date: "+Date+"\n"+"Notes: "+Notes;
                 tv.setText(noteText);
                 tv.setMinHeight(30);
+//                tv.isClickable();
+//                tv.setOnClickListener(MainActivity.this);
 
                 newCardView.addView(tv);
                 cardV.addView(newCardView,cardcount);
+                Integer cardId = cardcount+7000;
+                newCardView. setId(cardId);
                 cardcount += 1;
     }
 
