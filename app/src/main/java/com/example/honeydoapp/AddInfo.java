@@ -71,11 +71,12 @@ public class AddInfo extends AppCompatActivity implements android.view.View.OnCl
                             {
                                 Toast.makeText(getApplicationContext(), "Notes is empty", Toast.LENGTH_LONG).show();
                             }else{
-                                Intent data = new Intent();
-                                data.putExtra(Name,"Name");
-                                data.putExtra(Date,"Date");
-                                data.putExtra(Notes,"Notes");
-                                setResult(2,data);
+                                Intent NDN = new Intent();
+                                NDN.setType("String");
+                                NDN.putExtra("Name", Name);
+                                NDN.putExtra("Date",Date);
+                                NDN.putExtra("Notes",Notes);
+                                setResult(3,NDN);
                                 finish();
                             }
                 break;

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.view.View;
@@ -20,10 +21,11 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
     implements android.view.View.OnClickListener {
-    private static Context mContext;
+    private Context mContext;
     private Button button;
-    private static LinearLayout cardV;
+    private LinearLayout cardV;
     private static int cardcount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,24 +40,31 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onClick(View view){
-        Toast.makeText(mContext, Integer.toString(view.getId()),Toast.LENGTH_LONG).show();
+//        Toast.makeText(mContext, Integer.toString(view.getId()),Toast.LENGTH_LONG).show();
 
         switch (view.getId()) {
             case R.id.button:
-                Intent viewAddInfo = new Intent(MainActivity.this,AddInfo.class);
-                startActivity(viewAddInfo);
-                Intent intent=new Intent(MainActivity.this,AddInfo.class);
-                startActivityForResult(intent,2);
+                AddInfo addHD = new AddInfo();
+                Intent intent = new Intent(MainActivity.this,addHD.getClass());
+                MainActivity.this.startActivityForResult(intent,2);
         }
     }
-
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 2) {
-            String returnedResult = new String();
-            returnedResult = data.getData().toString();
-            Toast.makeText(mContext, returnedResult, Toast.LENGTH_LONG);
+        // check if the request code is same as what is passed  here it is 2
+        if(requestCode==2 && resultCode == 3)
+        {
+            Bundle dataBundle = data.getExtras();
+            String Name;
+            Name = dataBundle.getString("Name");
+            String Date;
+            Date = dataBundle.getString("Date");
+            String Notes;
+            Notes = dataBundle.getString("Notes");
+//        Toast.makeText(this, Name+" - "+Date+" - "+Notes, Toast.LENGTH_SHORT).show();
+            AddHoneyDo(Name,Date,Notes);
         }
     }
 
@@ -81,7 +90,8 @@ public class MainActivity extends AppCompatActivity
                 // Initialize a new TextView to put in CardView
                 TextView tv = new TextView(mContext);
                 tv.setLayoutParams(params);
-                tv.setText("Name: "+Name+"\n"+"Date: "+Date+"\n"+"Notes: "+Notes);
+                String noteText = "Name: "+Name+"\n"+"Date: "+Date+"\n"+"Notes: "+Notes;
+                tv.setText(noteText);
                 tv.setMinHeight(30);
 
                 newCardView.addView(tv);
