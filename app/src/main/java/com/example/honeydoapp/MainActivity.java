@@ -39,11 +39,49 @@ public class MainActivity extends AppCompatActivity
         cardcount = 0;
         myDb = new databaseHelper(mContext);
         //TESTING
-        DeleteData(4);
-        DeleteData(1);
+//        DeleteData(0);
         InitializeList();
         //TESTING
-//        AddData(cardcount,"First Honey Do","Begining of Time","There once was a man from Nantuckett!");
+        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
+        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
+        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
+        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
+        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
+        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
+        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
+        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
+        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
+        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
+        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
+    }
+    @Override
+    public void onClick(View view){
+        Toast.makeText(mContext, Integer.toString(view.getId()),Toast.LENGTH_SHORT).show();
+        switch (view.getId()) {
+            case R.id.button:
+                AddInfo addHD = new AddInfo();
+                Intent intent = new Intent(MainActivity.this,addHD.getClass());
+                MainActivity.this.startActivityForResult(intent,2);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        // check if the request code is same as what is passed  here it is 2
+        if(requestCode==2 && resultCode == 3)
+        {
+            Bundle dataBundle = data.getExtras();
+            String Name;
+            Name = dataBundle.getString("Name");
+            String Date;
+            Date = dataBundle.getString("Date");
+            String Notes;
+            Notes = dataBundle.getString("Notes");
+//        Toast.makeText(this, Name+" - "+Date+" - "+Notes, Toast.LENGTH_SHORT).show();
+            AddData(cardcount,Name,Date,Notes);
+        }
     }
 
     private void InitializeList(){
@@ -77,59 +115,6 @@ public class MainActivity extends AppCompatActivity
         else
             Toast.makeText(MainActivity.this,"Data not Deleted",Toast.LENGTH_SHORT).show();
     }
-
-
-    public void viewAll() {
-       Cursor res = myDb.getAllData();
-       if(res.getCount() == 0) {
-       // show message
-        Toast.makeText(mContext,"Error \n Nothing found",Toast.LENGTH_SHORT);
-        return;
-       }
-       StringBuffer buffer = new StringBuffer();
-       while (res.moveToNext()) {
-           buffer.append("Id :"+ res.getInt(0)+"\n");
-           buffer.append("Name :"+ res.getString(1)+"\n");
-           buffer.append("Date :"+ res.getString(2)+"\n");
-           buffer.append("Notes :"+ res.getString(3)+"\n\n");
-           AddHoneyDo(res.getInt(0),res.getString(1),res.getString(2),res.getString(3));
-       }
-       // Show all data
-       Toast.makeText(mContext,"Data: "+buffer.toString(),Toast.LENGTH_SHORT);
-    }
-
-
-    @Override
-    public void onClick(View view){
-        Toast.makeText(mContext, Integer.toString(view.getId()),Toast.LENGTH_SHORT).show();
-        switch (view.getId()) {
-            case R.id.button:
-                AddInfo addHD = new AddInfo();
-                Intent intent = new Intent(MainActivity.this,addHD.getClass());
-                MainActivity.this.startActivityForResult(intent,2);
-        }
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        super.onActivityResult(requestCode, resultCode, data);
-        // check if the request code is same as what is passed  here it is 2
-        if(requestCode==2 && resultCode == 3)
-        {
-            Bundle dataBundle = data.getExtras();
-            String Name;
-            Name = dataBundle.getString("Name");
-            String Date;
-            Date = dataBundle.getString("Date");
-            String Notes;
-            Notes = dataBundle.getString("Notes");
-//        Toast.makeText(this, Name+" - "+Date+" - "+Notes, Toast.LENGTH_SHORT).show();
-            AddData(cardcount,Name,Date,Notes);
-        }
-    }
-
 
     public void AddHoneyDo(Integer id,String Name,String Date,String Notes){
 //                button.setText("Clicked");
@@ -170,6 +155,10 @@ public class MainActivity extends AppCompatActivity
                 cardV.addView(newCardView,cardcount);
                 newCardView. setId(id+cardcountInitial);
                 cardcount += 1;
+    }
+
+    public void EditHoneyDo(Integer id,String Name,String Date,String Notes){
+
     }
 
 }
