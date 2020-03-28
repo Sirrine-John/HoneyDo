@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/DueDate"
+                    android:id="@+id/EditDueDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Due Date" />
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/Notes"
+                    android:id="@+id/EditNotes"
                     android:layout_width="match_parent"
                     android:layout_height="115dp"
                     android:hint="Notes" />

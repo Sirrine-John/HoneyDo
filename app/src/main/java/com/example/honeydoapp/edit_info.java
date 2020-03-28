@@ -14,26 +14,26 @@ public class edit_info extends AppCompatActivity implements android.view.View.On
     private Button button2;
     private Button button3;
     private Integer cardId;
-    private String Name;
-    private String Date;
-    private String Notes;
 
-    public edit_info(Integer id, String name, String date, String notes) {
-        cardId = id;
-        Name = name;
-        Date = date;
-        Notes = notes;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String Name;
+        String Date;
+        String Notes;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_info);
         button2 = findViewById(R.id.button2);
         button2.setOnClickListener(this);
         button3 = findViewById(R.id.button3);
         button3.setOnClickListener(this);
-        FillForm();
+        Bundle b = getIntent().getExtras();
+        if(b != null)
+        cardId = b.getInt("bId");
+        Name = b.getString("bName");
+        Date = b.getString("bDate");
+        Notes = b.getString("bNotes");
+        FillForm(Name,Date,Notes);
     }
 
     @Override
@@ -45,13 +45,13 @@ public class edit_info extends AppCompatActivity implements android.view.View.On
         }
     }
 
-    private void FillForm() {
-        TextInputEditText name = findViewById(R.id.EditHoneyDoName);
-        TextInputEditText date = findViewById(R.id.EditDueDate);
-        TextInputEditText notes = findViewById(R.id.EditNotes);
+    private void FillForm(String Name, String Date, String Notes) {
+        TextInputEditText tname = findViewById(R.id.EditHoneyDoName);
+        TextInputEditText tdate = findViewById(R.id.EditDueDate);
+        TextInputEditText tnotes = findViewById(R.id.EditNotes);
 
-        name.setText(Name);
-        date.setText(Date);
-        notes.setText(Notes);
+        tname.setText(Name);
+        tdate.setText(Date);
+        tnotes.setText(Notes);
     }
 }

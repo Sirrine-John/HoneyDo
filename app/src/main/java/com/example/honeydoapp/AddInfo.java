@@ -32,7 +32,7 @@ public class AddInfo extends AppCompatActivity implements android.view.View.OnCl
         //create a date string.
         String date_n = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).format(new Date());
         //get hold of textview.
-        TextInputEditText date  = findViewById(R.id.DueDate);
+        TextInputEditText date  = findViewById(R.id.EditDueDate);
         //set it as current date.
         date.setText(date_n);
     }
@@ -51,9 +51,9 @@ public class AddInfo extends AppCompatActivity implements android.view.View.OnCl
                 String Notes;
                 getHelper = findViewById(R.id.EditHoneyDoName);
                 Name = getHelper.getText().toString();
-                getHelper = findViewById(R.id.DueDate);
+                getHelper = findViewById(R.id.EditDueDate);
                 Date = getHelper.getText().toString();
-                getHelper = findViewById(R.id.Notes);
+                getHelper = findViewById(R.id.EditNotes);
                 Notes = getHelper.getText().toString();
                 if ( ( Name.equals("")) )
                     {

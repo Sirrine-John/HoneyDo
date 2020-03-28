@@ -86,8 +86,14 @@ public class MainActivity extends AppCompatActivity
             Cursor singleRow = myDb.getSingleRow(view.getId()-cardcountInitial);
             if (singleRow != null)
                 singleRow.moveToFirst();
-            edit_info editHD = new edit_info(singleRow.getInt(0),singleRow.getString(1),singleRow.getString(2),singleRow.getString(3));
+            edit_info editHD = new edit_info();
             Intent intent = new Intent(MainActivity.this,editHD.getClass());
+            Bundle b = new Bundle();
+            b.putInt("bId",singleRow.getInt(0));
+            b.putString("bName",singleRow.getString(1));
+            b.putString("bDate",singleRow.getString(2));
+            b.putString("bNotes",singleRow.getString(3));
+            intent.putExtras(b);
             MainActivity.this.startActivityForResult(intent,2);
         }
     }
