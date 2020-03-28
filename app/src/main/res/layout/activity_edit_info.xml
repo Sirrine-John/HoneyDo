@@ -69,7 +69,7 @@
                 android:layout_height="match_parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/HoneyDoName"
+                    android:id="@+id/EditHoneyDoName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="HoneyDo Name"
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/DueDate"
+                    android:id="@+id/EditDueDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Due Date" />
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/Notes"
+                    android:id="@+id/EditNotes"
                     android:layout_width="match_parent"
                     android:layout_height="115dp"
                     android:hint="Notes" />
@@ -118,7 +118,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Back"
+        android:text="@android:string/cancel"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

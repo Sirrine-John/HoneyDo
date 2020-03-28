@@ -39,29 +39,56 @@ public class MainActivity extends AppCompatActivity
         cardcount = 0;
         myDb = new databaseHelper(mContext);
         //TESTING
-//        DeleteData(0);
+        DeleteData(0);
+        DeleteData(1);
+        DeleteData(2);
+        DeleteData(3);
+        DeleteData(4);
+//        DeleteData(5);
+//        DeleteData(6);
+//        DeleteData(7);
+//        DeleteData(8);
+//        DeleteData(9);
+//        DeleteData(10);
+//        DeleteData(11);
+//        DeleteData(12);
+//        DeleteData(13);
+//        DeleteData(14);
+//        DeleteData(15);
+//        DeleteData(16);
+//        DeleteData(17);
+//        DeleteData(18);
+//        DeleteData(19);
         InitializeList();
         //TESTING
         AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
-        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
-        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
-        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
-        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
-        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
-        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
-        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
-        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
-        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
-        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
+//        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
+//        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
+//        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
+//        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
+//        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
+//        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
+//        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
+//        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
+//        AddData(cardcount,"Filler","Mar 26, 2020","Filler Notes that are not that important, but are here to take up space.");
     }
     @Override
     public void onClick(View view){
-        Toast.makeText(mContext, Integer.toString(view.getId()),Toast.LENGTH_SHORT).show();
+//        Toast.makeText(mContext, Integer.toString(view.getId()),Toast.LENGTH_SHORT).show();
         switch (view.getId()) {
             case R.id.button:
                 AddInfo addHD = new AddInfo();
                 Intent intent = new Intent(MainActivity.this,addHD.getClass());
                 MainActivity.this.startActivityForResult(intent,2);
+                break;
+        }
+        if (view instanceof CardView){
+            Cursor singleRow = myDb.getSingleRow(view.getId()-cardcountInitial);
+            if (singleRow != null)
+                singleRow.moveToFirst();
+            edit_info editHD = new edit_info(singleRow.getInt(0),singleRow.getString(1),singleRow.getString(2),singleRow.getString(3));
+            Intent intent = new Intent(MainActivity.this,editHD.getClass());
+            MainActivity.this.startActivityForResult(intent,2);
         }
     }
 
@@ -88,13 +115,13 @@ public class MainActivity extends AppCompatActivity
         Cursor res = myDb.getAllData();
         if(res.getCount() == 0) {
             // show message
-            Toast.makeText(mContext,"Error \n Nothing found",Toast.LENGTH_SHORT);
+//            Toast.makeText(mContext,"Error \n Nothing found",Toast.LENGTH_SHORT);
             return;
         }
         StringBuffer buffer = new StringBuffer();
         while (res.moveToNext()) {
             AddHoneyDo(res.getInt(0),res.getString(1),res.getString(2),res.getString(3));
-            Toast.makeText(mContext,"DB Index: "+res.getInt(0),Toast.LENGTH_SHORT);
+//            Toast.makeText(mContext,"DB Index: "+res.getInt(0),Toast.LENGTH_SHORT);
         }
     }
 
@@ -103,17 +130,18 @@ public class MainActivity extends AppCompatActivity
         boolean isInserted = myDb.insertData(id,name,date,notes);
         if(isInserted == true){
             AddHoneyDo(id,name,date,notes);
-            Toast.makeText(MainActivity.this,"Data Inserted",Toast.LENGTH_SHORT).show();}
+//            Toast.makeText(MainActivity.this,"Data Inserted",Toast.LENGTH_SHORT).show();
+            }
         else
             Toast.makeText(MainActivity.this,"Data not Inserted",Toast.LENGTH_SHORT).show();
     }
 
     public void DeleteData(Integer id) {
         Integer deletedRows = myDb.deleteData(id.toString());
-        if(deletedRows > 0)
-            Toast.makeText(MainActivity.this,"Data Deleted",Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(MainActivity.this,"Data not Deleted",Toast.LENGTH_SHORT).show();
+//        if(deletedRows > 0)
+//            Toast.makeText(MainActivity.this,"Data Deleted",Toast.LENGTH_SHORT).show();
+//        else
+//            Toast.makeText(MainActivity.this,"Data not Deleted",Toast.LENGTH_SHORT).show();
     }
 
     public void AddHoneyDo(Integer id,String Name,String Date,String Notes){

@@ -2,11 +2,9 @@ package com.example.honeydoapp;
 
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +13,17 @@ public class edit_info extends AppCompatActivity implements android.view.View.On
 
     private Button button2;
     private Button button3;
+    private Integer cardId;
+    private String Name;
+    private String Date;
+    private String Notes;
+
+    public edit_info(Integer id, String name, String date, String notes) {
+        cardId = id;
+        Name = name;
+        Date = date;
+        Notes = notes;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +33,7 @@ public class edit_info extends AppCompatActivity implements android.view.View.On
         button2.setOnClickListener(this);
         button3 = findViewById(R.id.button3);
         button3.setOnClickListener(this);
+        FillForm();
     }
 
     @Override
@@ -33,5 +43,15 @@ public class edit_info extends AppCompatActivity implements android.view.View.On
                 finish();
                 break;
         }
+    }
+
+    private void FillForm() {
+        TextInputEditText name = findViewById(R.id.EditHoneyDoName);
+        TextInputEditText date = findViewById(R.id.EditDueDate);
+        TextInputEditText notes = findViewById(R.id.EditNotes);
+
+        name.setText(Name);
+        date.setText(Date);
+        notes.setText(Notes);
     }
 }

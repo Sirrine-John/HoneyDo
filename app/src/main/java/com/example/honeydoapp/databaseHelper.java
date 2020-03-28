@@ -52,6 +52,12 @@ public class databaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    public Cursor getSingleRow(Integer id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from "+TABLE_NAME+" where ID = "+id.toString(),null);
+        return res;
+    }
+
     public boolean updateData(String id,String name,String date,String notes) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
