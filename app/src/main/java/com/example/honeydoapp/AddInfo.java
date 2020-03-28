@@ -25,6 +25,7 @@ public class AddInfo extends AppCompatActivity implements android.view.View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_info);
+        //create listeners for the buttons
         button2 = findViewById(R.id.button2);
         button2.setOnClickListener(this);
         button3 = findViewById(R.id.button3);
@@ -43,18 +44,21 @@ public class AddInfo extends AppCompatActivity implements android.view.View.OnCl
             case R.id.button3:
                 finish();
                 break;
+            //Handle the save button click
             case R.id.button2:
 
                 TextInputEditText getHelper;
                 String Name;
                 String Date;
                 String Notes;
+                //getting and setting the variables from the text edit screens
                 getHelper = findViewById(R.id.EditHoneyDoName);
                 Name = getHelper.getText().toString();
                 getHelper = findViewById(R.id.EditDueDate);
                 Date = getHelper.getText().toString();
                 getHelper = findViewById(R.id.EditNotes);
                 Notes = getHelper.getText().toString();
+                //Catch if there are any empty fields and pop a toast message.
                 if ( ( Name.equals("")) )
                     {
                         Toast toast=Toast.makeText(this,"HoneyDo Name is empty", Toast.LENGTH_LONG);
@@ -67,6 +71,7 @@ public class AddInfo extends AppCompatActivity implements android.view.View.OnCl
                             {
                                 Toast.makeText(getApplicationContext(), "Notes is empty", Toast.LENGTH_LONG).show();
                             }else{
+                                //format the intent result to return to the MainActivity
                                 Intent NDN = new Intent();
                                 NDN.setType("String");
                                 NDN.putExtra("Name", Name);

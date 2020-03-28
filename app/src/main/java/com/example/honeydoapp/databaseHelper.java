@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class databaseHelper extends SQLiteOpenHelper {
+    //Create the main table to hold the data from the master card records
     public static final String DATABASE_NAME = "HoneyDo.db";
     public static final String TABLE_NAME = "HoneyDo_Master_table";
     public static final String COL_1 = "ID";
@@ -20,6 +21,7 @@ public class databaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, 1);
     }
 
+// Create the database if it doesn't exist
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table "+ TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT,Date TEXT,Notes TEXT)");
@@ -31,7 +33,7 @@ public class databaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-
+//insert data one record at a time into the database
     public boolean insertData(Integer ID,String name,String date,String notes) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
